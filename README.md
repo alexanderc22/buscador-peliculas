@@ -1,61 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Buscador de Peliculas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es una **API de búsqueda de películas** desarrollada con **Laravel 12**, que permite obtener información de películas a través de parámetros como `título` y `año`.
 
-## About Laravel
+## Características principales
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- API REST desarrollada en Laravel 12.x
+- Endpoint para búsqueda de películas (`/api/movies/search`)
+- Arquitectura limpia y organizada (controladores, rutas, vistas)
+- Configuración simple y lista para correr en entorno local
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Requisitos previos
 
-## Learning Laravel
+Antes de ejecutar este proyecto, debe de tener instalado:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP >= 8.2  
+- Composer  
+- MySQL 
+- Laravel CLI (`composer global require laravel/installer`)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Instalación
 
-## Laravel Sponsors
+1. Clonar el repositorio:
+   
+   git clone https://github.com/usuario/laravel-movies-api.git
+   cd laravel-movies-api
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. Instala las dependencias:   
+    composer install
+3. Crea el archivo de entorno:
+    cp .env.example .env
+4. Genera la clave de la aplicación:
+    php artisan key:generate
+5. Configura la base de datos en el archivo .env, por ejemplo:
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=movies_api
+    DB_USERNAME=root
+    DB_PASSWORD=pass
+6. Configura onsumo de API KEY www.omdbapi.com/
+    OMDB_API_KEY=key_generada_de_omdbapi
+    OMDB_API_URL=https://www.omdbapi.com/
+7. Ejecuta las migraciones:
+    php artisan migrate
+8. Inicia el servidor de desarrollo:
+    php artisan serve
+## Endpoint disponible
+- Buscar películas
+- URL: http://127.0.0.1:8000/api/movies/search
+- Método: GET
+- Parámetros disponibles:
 
-### Premium Partners
+    Parámetro	Tipo	    Descripción
+    q	        string	    Título de la película a buscar
+    year	    int	        Año de lanzamiento (opcional)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
+- Ejemplo de solicitud:
+  GET /api/movies/search?q=matrix&year=1999
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Ejemplo de Respuesta
+   {
+        "title": "The Matrix",
+        "year": "1999",
+        "genre": "Action, Sci-Fi",
+        "director": "Lana Wachowski, Lilly Wachowski"
+    }
 
-## Code of Conduct
+## Tecnologías utilizadas
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Laravel 12
+- PHP 8.2
+- Composer
+- (Opcional) Laravel Sail o Docker para entornos de desarrollo
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Autor
+    Alexander Cruz
+    Desarrollador Web PHP / Laravel
+    alexander.cruz.ing@gmail.com
